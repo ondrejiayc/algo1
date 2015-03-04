@@ -10,9 +10,16 @@ def main():
 	hmin=[]
 	# which heap is due for an insertion, true for min, false for max
 	mainSwitch=True
-	with open(file,'r') as f:
+	with open('Median.txt','r') as f:
+		for i in range(2):
+			n=int(f.readline())
+			heappush(hmax,n)
+			tot=tot+hmax[0]
+		
+		heappush(hmin,-heappop(hmax))
+			
 		for line in f:
-			n=int(line.strip())			
+			n=int(line)
 			#decide which heap to add to
 			if n>hmax[0]:
 				heappush(hmax,n)
@@ -23,15 +30,9 @@ def main():
 				if not mainSwitch:
 					heappush(hmax,-heappop(hmin))
 			mainSwitch=not mainSwitch
-			#get median
-			if mainSwitch:
-			    med=hmax[0]
-			else:
-			    med=-hmin[0]
-			#get tot
-			tot=(tot+med)%10000
+			tot=(tot-hmin[0])%10000
 	
 	print 'Tot: '+str(tot)
 
-if __name__='__main__':
+if __name__=='__main__':
 	main()
