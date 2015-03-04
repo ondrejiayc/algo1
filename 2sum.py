@@ -15,7 +15,7 @@ def main():
     for i in range(-10000,10001):
         print 'Testing '+str(i)
         for n in d:
-            if (i-n) in d:
+            if ((i-n) in d) and (n!=(i-n)):
                total+=1
                print total
                break
